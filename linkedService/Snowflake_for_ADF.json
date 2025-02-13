@@ -1,0 +1,17 @@
+{
+	"name": "Snowflake_for_ADF",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SnowflakeV2",
+		"typeProperties": {
+			"authenticationType": "Basic",
+			"accountIdentifier": "GF18464",
+			"user": "sk452y",
+			"database": "ADF_LEARNING",
+			"warehouse": "COMPUTE_WH",
+			"role": "ACCOUNTADMIN",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDVBNjM2MUE3LTZCRjgtNDY2Qi1CODFCLTE4NUY0NTNGNEIyN182NDM2OGQ0OS04Nzk3LTQyZjUtOGYwOS01ZjJiNWEwNGMxMzciDQp9"
+		}
+	}
+}
