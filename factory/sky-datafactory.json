@@ -1,0 +1,9 @@
+{
+	"name": "sky-datafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8f355e7e-03ea-442b-8733-4a2bb2ee14ee",
+		"tenantId": "6fe5a7c6-daf0-4f3e-8367-dc022e4ce109"
+	}
+}
