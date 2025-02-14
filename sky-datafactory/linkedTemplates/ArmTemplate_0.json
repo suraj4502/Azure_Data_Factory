@@ -72,6 +72,46 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SnowflakeTable_summarized_orders')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Snowflake_for_ADF",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [
+					{
+						"name": "YEAR_ID",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "MONTH_ID",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "TOTALSALES",
+						"type": "NUMBER",
+						"precision": 18,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "TEST_DATA",
+					"table": "SALESAGGREGATE"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Snowflake_for_ADF')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/source_orders')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -141,46 +181,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SnowflakeTable_summarized_orders')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Snowflake_for_ADF",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SnowflakeV2Table",
-				"schema": [
-					{
-						"name": "YEAR_ID",
-						"type": "NUMBER",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "MONTH_ID",
-						"type": "NUMBER",
-						"precision": 38,
-						"scale": 0
-					},
-					{
-						"name": "TOTALSALES",
-						"type": "NUMBER",
-						"precision": 18,
-						"scale": 2
-					}
-				],
-				"typeProperties": {
-					"schema": "TEST_DATA",
-					"table": "SALESAGGREGATE"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Snowflake_for_ADF')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -229,11 +229,10 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> sourceSales",
-						"sourceSales filter(SALES >=2000\r",
-						") ~> filter1",
+						"sourceSales filter(SALES >=2000) ~> filter1",
 						"filter1 aggregate(groupBy(YEAR_ID,",
 						"          MONTH_ID),",
-						"     TotalSales = sum(SALES)) ~> groupbyyearmonth",
+						"     TOTALSALES = sum(SALES)) ~> groupbyyearmonth",
 						"groupbyyearmonth sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
