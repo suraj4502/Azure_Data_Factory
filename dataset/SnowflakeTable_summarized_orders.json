@@ -1,0 +1,35 @@
+{
+	"name": "SnowflakeTable_summarized_orders",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake_for_ADF",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "YEAR_ID",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "MONTH_ID",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "TOTALSALES",
+				"type": "NUMBER",
+				"precision": 18,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "TEST_DATA",
+			"table": "SALESAGGREGATE"
+		}
+	}
+}
